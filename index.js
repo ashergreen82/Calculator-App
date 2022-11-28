@@ -3,7 +3,7 @@ const CalculatorDisplay = document.getElementById("calculator_display");
 let numberTobeDisplayed = "0";
 let totalItemsDisplayed = "0";
 
-// number button creation (Alt + 251 = square root and Alt + 0247)
+// number button creation (Alt + 251 = square root and Alt + 0247 = division symbol)
 buttonCreator("MC");
 buttonCreator("MR");
 buttonCreator("M-");
