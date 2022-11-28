@@ -1,5 +1,5 @@
 body {
-    background-color: white;
+    background-color: pink;
 }
 
 h1 {
@@ -43,4 +43,34 @@ p {
 img {
     width: 100px;
     height: 100px;
+}
+
+#calculator_container {
+    /* display: flex; */
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto auto auto;
+    background-color: #2196F3;
+    padding: 10px;
+}
+
+#calculator_display {
+    display: flexbox;
+    background-color: aliceblue;
+    width: 10%;
+    text-justify: right;
+}
+
+.number_button {
+    /* display: flex; */
+    /* display: grid; */
+    /* margin-right: 10px; */
+    margin: 10px;
+    background-color: orange;
+    font-size: 40px;
+    /* border-radius: 8px; */
+}
+
+.number_button:hover {
+    background-color: yellow;
 }
