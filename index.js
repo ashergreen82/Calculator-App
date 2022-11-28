@@ -3,15 +3,32 @@ const CalculatorDisplay = document.getElementById("calculator_display");
 let numberTobeDisplayed = "0";
 let totalItemsDisplayed = "0";
 
-// number button creation
-for (i = 0; i < 10; i++) {
-    const createNumberButton = document.createElement("button");
-    createNumberButton.innerText = i;
-    createNumberButton.setAttribute("class", "number_button");
-    createNumberButton.setAttribute("id", `number_button_${i}`);
-    calculatorContainer.appendChild(createNumberButton);
-    numberTobeDisplayed = createNumberButton.addEventListener("click", buttonSelected);
+// number button creation (Alt + 251 = square root and Alt + 0247)
+buttonCreator("MC");
+buttonCreator("MR");
+buttonCreator("M-");
+buttonCreator("M+");
+buttonCreator("√");
+for (i = 7; i < 10; i++) {
+    buttonCreator(i);
 }
+buttonCreator("÷");
+buttonCreator("+/-");
+for (i = 4; i < 7; i++) {
+    buttonCreator(i);
+}
+buttonCreator("X");
+buttonCreator("C");
+for (i = 1; i < 4; i++) {
+    buttonCreator(i);
+}
+buttonCreator("-");
+buttonCreator("AC");
+buttonCreator(0);
+buttonCreator(".");
+buttonCreator("=");
+buttonCreator("+");
+
 totalItemsDisplayed = calculatorDisplayProcess(numberTobeDisplayed, totalItemsDisplayed);
 
 //functions
@@ -36,3 +53,11 @@ function buttonSelected(e) {
 
 }
 
+function buttonCreator(buttonLabel) {
+    const createNumberButton = document.createElement("button");
+    createNumberButton.innerText = buttonLabel;
+    createNumberButton.setAttribute("class", "number_button");
+    createNumberButton.setAttribute("id", `number_button_${buttonLabel}`);
+    calculatorContainer.appendChild(createNumberButton);
+    numberTobeDisplayed = createNumberButton.addEventListener("click", buttonSelected);
+}
