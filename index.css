@@ -49,13 +49,13 @@ img {
     /* display: flex; */
     display: grid;
     align-items: center;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto auto auto auto;
     background-color: #2196F3;
     padding: 10px;
 }
 
 #calculator_display {
-    display: flexbox;
+    /* display: flexbox; */
     background-color: aliceblue;
     width: 10%;
     text-justify: right;
@@ -67,7 +67,7 @@ img {
     /* margin-right: 10px; */
     margin: 10px;
     background-color: orange;
-    font-size: 40px;
+    font-size: 35px;
     /* border-radius: 8px; */
 }
 
