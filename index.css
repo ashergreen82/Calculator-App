@@ -48,10 +48,11 @@ img {
 #calculator_container {
     /* display: flex; */
     display: grid;
-    align-items: center;
+    /* align-items: center; */
     grid-template-columns: repeat(5, 90px);
     background-color: #2196F3;
     padding: 10px;
+    justify-content: center;
 }
 
 #calculator_display {
