@@ -72,6 +72,50 @@ img {
     /* border-radius: 8px; */
 }
 
+.operator_button {
+    /* display: flex; */
+    /* display: grid; */
+    /* margin-right: 10px; */
+    margin: 10px;
+    background-color: orange;
+    font-size: 35px;
+    /* border-radius: 8px; */
+}
+
+.function_button {
+    /* display: flex; */
+    /* display: grid; */
+    /* margin-right: 10px; */
+    margin: 10px;
+    background-color: orange;
+    font-size: 35px;
+    /* border-radius: 8px; */
+}
+
+.memory_button {
+    /* display: flex; */
+    /* display: grid; */
+    /* margin-right: 10px; */
+    margin: 10px;
+    background-color: orange;
+    font-size: 35px;
+    /* border-radius: 8px; */
+}
+
+.answer_button {
+    /* display: flex; */
+    /* display: grid; */
+    /* margin-right: 10px; */
+    margin: 10px;
+    background-color: orange;
+    font-size: 35px;
+    /* border-radius: 8px; */
+}
+
+button:hover {
+    background-color: yellow;
+}
+
 .number_button:hover {
     background-color: yellow;
 }
