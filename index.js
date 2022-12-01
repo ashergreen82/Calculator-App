@@ -12,10 +12,20 @@ let operator = null
 let numberTobeDisplayed = "0";
 let totalItemsDisplayed = "0";
 // numberButtonElement.addEventListener("click", buttonSelected);
-for (i = 0; i < 10; i++) {
-    numberButtonEventListenerCreator = document.getElementById(`number_button_${i}`);
-    numberButtonEventListenerCreator.addEventListener("click", buttonSelected);
+// for (i = 0; i < 10; i++) {
+//     numberButtonEventListenerCreator = document.getElementById(`number_button_${i}`);
+//     numberButtonEventListenerCreator.addEventListener("click", buttonSelected);
+// }
+
+const calculatorButtonsList = document.querySelectorAll("#calculator_container");
+const calculatorButtonsList1 = document.querySelectorAll(".memory_button");
+console.log(calculatorButtonsList);
+console.log(calculatorButtonsList1);
+for (i = 0; i < calculatorButtonsList1.length; i++) {
+    x = document.getElementById(calculatorButtonsList1[i]);
+    x.addEventListener("click", buttonSelected);
 }
+
 // operatorButtonElement.addEventListener("click", buttonSelected);
 // functionButtonElement.addEventListener("click", buttonSelected);
 // answerButtonElement.addEventListener("click", buttonSelected);
