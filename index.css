@@ -60,6 +60,7 @@ img {
     background-color: aliceblue;
     width: 10%;
     text-justify: right;
+    text-align: right;
 }
 
 .number_button {
