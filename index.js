@@ -12,7 +12,6 @@ const numberButtonPressed = document.querySelectorAll(".number_button");
 const operatorButtonPressed = document.querySelectorAll(".operator_button");
 const functionButtonPressed = document.querySelectorAll(".function_button");
 const answerButtonPressed = document.querySelectorAll(".answer_button");
-const allButtons = document.querySelectorAll("button");
 let operator = null;
 let numberTobeDisplayed = "";
 let totalItemsDisplayed = "0";
@@ -21,9 +20,6 @@ let flag = 0;
 let flagOperater = 0;
 let number1 = 0;
 let number2 = 0;
-
-
-console.log("All button elements: ", allButtons);
 
 memoryButtonPressed.forEach((element) => {
     element.addEventListener("click", memoryButtonClicked);
@@ -48,26 +44,40 @@ function memoryButtonClicked(e) {
 function numberButtonClicked(e) {
     let temporaryNumberVariable = e.target.innerText;
     console.log(e.target.innerText);
+    // if (opeator button has been pressed) 
+    //      if (second number is empty)
+    //          set second mumber to the button that was pressed
+    //      else:
+    //          second number is not empty:  Append to the second number
+    // else: Then update the first number1
+
+
+
+
+    // if (flagOperater === 1) {
+
+    // }
     if (flag === 1) {
         numberTobeDisplayed = "";
         calculatorDisplay.innerText = numberTobeDisplayed;
         flag = 0;
     }
-    if (numberTobeDisplayed.length >= 1 && operator === null) {
+    if (temporaryNumberVariable.length >= 1 && operator === null) {
         // numberTobeDisplayed = numberTobeDisplayed + temporaryNumberVariable;
         numberTobeDisplayed += temporaryNumberVariable;
-    } else if (numberTobeDisplayed.length >= 1 && operator == "+") {
-        answer += numberTobeDisplayed;
+    } else if (temporaryNumberVariable.length >= 1 && operator == "+") {
+        answer += Number(temporaryNumberVariable);
         numberTobeDisplayed += temporaryNumberVariable;
-        console.log(`the answer so far is ${answer}`);
+        console.log(`The answer so far is ${answer}`);
     }
     else {
         numberTobeDisplayed = temporaryNumberVariable;
         calculatorDisplay.innerText = numberTobeDisplayed;
     }
-    console.log(`this is the number to be displayed ${numberTobeDisplayed}`);
-    console.log(`This is the length of the number to be displayed ${numberTobeDisplayed.length}`);
+    console.log(`This is the number to be displayed: ${numberTobeDisplayed}`);
+    console.log(`This is the length of the number to be displayed: ${numberTobeDisplayed.length}`);
     calculatorDisplay.innerText = numberTobeDisplayed;
+    number1 = Number(numberTobeDisplayed);
 }
 
 function operatorButtonClicked(e) {
@@ -77,6 +87,7 @@ function operatorButtonClicked(e) {
         operator = "+";
         numberTobeDisplayed = "";
         flagOperater = 1;
+        answer = Number(number1);
     }
 }
 
@@ -84,9 +95,10 @@ function functionButtonClicked(e) {
     let temporaryFunctionVariable = e.target.innerText;
     console.log(e.target.innerText);
     if (temporaryFunctionVariable === "C") {
-        numberTobeDisplayed = "0";
-        calculatorDisplay.innerText = numberTobeDisplayed;
-        flag = 1
+        clearDisplay();
+        // numberTobeDisplayed = "0";
+        // calculatorDisplay.innerText = numberTobeDisplayed;
+        // flag = 1
     }
 }
 function answerButtonClicked(e) {
@@ -96,13 +108,15 @@ function answerButtonClicked(e) {
     if (temporaryFunctionVariable === "=") {
         calculatorDisplay.innerText = answer;
         flag = 0;
+        // clearDisplay();
     }
 }
 
-function memoryButtonClicked(e) {
-    let temporaryFunctionVariable = e.target.innerText;
-    console.log(e.target.innerText);
-    console.log(answer);
+
+function clearDisplay() {
+    numberTobeDisplayed = "0";
+    calculatorDisplay.innerText = numberTobeDisplayed;
+    flag = 1
 }
 
 // const calculatorButtonsList = document.querySelectorAll("#calculator_container");
@@ -148,4 +162,3 @@ function calculatorDisplayProcess(numberTobeDisplayed, totalItemsDisplayed) {
 
 //     button.addEventListener("click", buttonSelected)
 // }
-
