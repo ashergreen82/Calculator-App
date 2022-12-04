@@ -16,7 +16,7 @@ let operator = null;
 let numberTobeDisplayed = "";
 let totalItemsDisplayed = "0";
 let answer = null;
-let flag = 0;
+let flagEqual = 0;
 let flagOperater = 0;
 let number1 = null;
 let number2 = null;
@@ -34,7 +34,7 @@ functionButtonPressed.forEach((element) => {
     element.addEventListener("click", functionButtonClicked);
 })
 answerButtonPressed.forEach((element) => {
-    element.addEventListener("click", answerButtonClicked);
+    element.addEventListener("click", equalButtonClicked);
 })
 
 function memoryButtonClicked(e) {
@@ -45,7 +45,14 @@ function memoryButtonClicked(e) {
 function numberButtonClicked(e) {
     let temporaryNumberVariable = e.target.innerText;
     console.log(e.target.innerText);
-    // if (opeator button has been pressed) 
+
+    // if equals was previoulsy pressed
+    if (flagEqual === 1) {
+        calculatorDisplay.innerText = temporaryNumberVariable;
+        partialReset();
+    }
+    // if (opeator button has been pressed)
+
     if (operator !== null) {
         //      if (second number is empty)
         if (number2 === null) {
@@ -102,7 +109,6 @@ function operatorButtonClicked(e) {
     if (temporaryOperatorVariable === "+") {
         if (flagOperater == 1) {
             answer = Number(number1) + Number(number2);
-
         } else if (flagOperater > 1) {
             answer += Number(number2);
         }
@@ -132,7 +138,7 @@ function functionButtonClicked(e) {
 }
 
 // Equals Function
-function answerButtonClicked(e) {
+function equalButtonClicked(e) {
     let temporaryFunctionVariable = e.target.innerText;
     console.log(e.target.innerText);
     console.log(answer);
@@ -143,6 +149,7 @@ function answerButtonClicked(e) {
         } else {
             answer = Number(number1) + Number(number2);
             calculatorDisplay.innerText = answer;
+            flagEqual = 1;
         }
         // partialReset();
         // operator = null;
@@ -158,13 +165,13 @@ function answerButtonClicked(e) {
 function clearDisplay() {
     numberTobeDisplayed = "0";
     calculatorDisplay.innerText = numberTobeDisplayed;
-    flag = 1
+    flagEqual = 0
 }
 
 function partialReset() {
     numberTobeDisplayed = "";
     calculatorDisplay.innerText = "0";
-    flag = 1;
+    flagEqual = 0;
     temporaryNumberVariable = "";
     number1 = null;
     number2 = null;
