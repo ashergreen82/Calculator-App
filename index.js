@@ -15,11 +15,11 @@ const answerButtonPressed = document.querySelectorAll(".answer_button");
 let operator = null;
 let numberTobeDisplayed = "";
 let totalItemsDisplayed = "0";
-let answer = 0;
+let answer = null;
 let flag = 0;
 let flagOperater = 0;
-let number1 = 0;
-let number2 = 0;
+let number1 = null;
+let number2 = null;
 
 memoryButtonPressed.forEach((element) => {
     element.addEventListener("click", memoryButtonClicked);
@@ -41,98 +41,137 @@ function memoryButtonClicked(e) {
     console.log(e.target.innerText);
 }
 
+// Number Buttons
 function numberButtonClicked(e) {
     let temporaryNumberVariable = e.target.innerText;
     console.log(e.target.innerText);
     // if (opeator button has been pressed) 
-    //      if (second number is empty)
-    //          set second mumber to the button that was pressed
-    //      else:
-    //          second number is not empty:  Append to the second number
-    // else: Then update the first number1
+    if (operator !== null) {
+        //      if (second number is empty)
+        if (number2 === null) {
+            //          set second mumber to the button that was pressed
+            number2 = temporaryNumberVariable;
+        } else { // else
+            //          second number is not empty:  Append to the second number
+            number2 += temporaryNumberVariable;
+        }
+        calculatorDisplay.innerText = number2
+        console.log(`The answer so far is ${answer}`);
+    }
+    if (operator == null) {
+        // if (first number is null)
+        numberTobeDisplayed += temporaryNumberVariable;
+        calculatorDisplay.innerText = numberTobeDisplayed;
+        number1 = numberTobeDisplayed; // set first number to the button that was pressed
+    }
+    // else
+    // append button that was pressed to first number
 
-
-
+    //  render the first number in the display
 
     // if (flagOperater === 1) {
 
     // }
-    if (flag === 1) {
-        numberTobeDisplayed = "";
-        calculatorDisplay.innerText = numberTobeDisplayed;
-        flag = 0;
-    }
-    if (temporaryNumberVariable.length >= 1 && operator === null) {
-        // numberTobeDisplayed = numberTobeDisplayed + temporaryNumberVariable;
-        numberTobeDisplayed += temporaryNumberVariable;
-    } else if (temporaryNumberVariable.length >= 1 && operator == "+") {
-        answer += Number(temporaryNumberVariable);
-        numberTobeDisplayed += temporaryNumberVariable;
-        console.log(`The answer so far is ${answer}`);
-    }
-    else {
-        numberTobeDisplayed = temporaryNumberVariable;
-        calculatorDisplay.innerText = numberTobeDisplayed;
-    }
-    console.log(`This is the number to be displayed: ${numberTobeDisplayed}`);
-    console.log(`This is the length of the number to be displayed: ${numberTobeDisplayed.length}`);
-    calculatorDisplay.innerText = numberTobeDisplayed;
-    number1 = Number(numberTobeDisplayed);
+    // if (flag === 1) {
+    //     numberTobeDisplayed = "";
+    //     calculatorDisplay.innerText = numberTobeDisplayed;
+    //     flag = 0;
+    // }
+    // if (temporaryNumberVariable.length >= 1 && operator === null) {
+    //     // numberTobeDisplayed = numberTobeDisplayed + temporaryNumberVariable;
+    //     numberTobeDisplayed += temporaryNumberVariable;
+    // } else if (temporaryNumberVariable.length >= 1 && operator == "+") {
+
+    // }
+    // else {
+    //     numberTobeDisplayed = temporaryNumberVariable;
+    //     calculatorDisplay.innerText = numberTobeDisplayed;
+    // }
+    // console.log(`This is the number to be displayed: ${numberTobeDisplayed}`);
+    // console.log(`This is the length of the number to be displayed: ${numberTobeDisplayed.length}`);
+    // calculatorDisplay.innerText = numberTobeDisplayed;
+    // number1 = Number(numberTobeDisplayed);
 }
 
+// Operator Function
 function operatorButtonClicked(e) {
     let temporaryOperatorVariable = e.target.innerText;
     console.log(e.target.innerText);
+
+    // Addition
     if (temporaryOperatorVariable === "+") {
+        if (flagOperater == 1) {
+            answer = Number(number1) + Number(number2);
+
+        } else if (flagOperater > 1) {
+            answer += Number(number2);
+        }
+        flagOperater += 1;
         operator = "+";
-        numberTobeDisplayed = "";
-        flagOperater = 1;
-        answer = Number(number1);
+        if (flagOperater > 1) {
+            numberTobeDisplayed = answer
+            calculatorDisplay.innerText = numberTobeDisplayed;
+        } else {
+            numberTobeDisplayed = "";
+        }
     }
+
+    // Subtraction
+    // Multiplication
+    // Division
 }
 
+// Clear Function
 function functionButtonClicked(e) {
     let temporaryFunctionVariable = e.target.innerText;
     console.log(e.target.innerText);
     if (temporaryFunctionVariable === "C") {
         clearDisplay();
-        // numberTobeDisplayed = "0";
-        // calculatorDisplay.innerText = numberTobeDisplayed;
-        // flag = 1
+        partialReset();
     }
 }
+
+// Equals Function
 function answerButtonClicked(e) {
     let temporaryFunctionVariable = e.target.innerText;
     console.log(e.target.innerText);
     console.log(answer);
-    if (temporaryFunctionVariable === "=") {
-        calculatorDisplay.innerText = answer;
-        flag = 0;
-        // clearDisplay();
+    // if (operator is equal to plus sign)
+    if (operator == "+") {
+        if (flagOperater > 1) {
+            calculatorDisplay.innerText = answer;
+        } else {
+            answer = Number(number1) + Number(number2);
+            calculatorDisplay.innerText = answer;
+        }
+        // partialReset();
+        // operator = null;
+        // number1 = null;
+        // number2 = null;
+        // flagOperater = 0;
     }
+    // then add number and number2 together
+    // display result on the display
 }
 
-
+// Clear display
 function clearDisplay() {
     numberTobeDisplayed = "0";
     calculatorDisplay.innerText = numberTobeDisplayed;
     flag = 1
 }
 
-// const calculatorButtonsList = document.querySelectorAll("#calculator_container");
-// const calculatorButtonsList1 = document.querySelectorAll(".memory_button");
-// console.log(calculatorButtonsList);
-// console.log(calculatorButtonsList1);
-// for (i = 0; i < calculatorButtonsList1.length; i++) {
-//     x = document.getElementById(calculatorButtonsList1[i]);
-//     x.addEventListener("click", buttonSelected);
-// }
-
-// operatorButtonElement.addEventListener("click", buttonSelected);
-// functionButtonElement.addEventListener("click", buttonSelected);
-// answerButtonElement.addEventListener("click", buttonSelected);
-// memoryButtonElement.addEventListener("click", buttonSelected);
-
+function partialReset() {
+    numberTobeDisplayed = "";
+    calculatorDisplay.innerText = "0";
+    flag = 1;
+    temporaryNumberVariable = "";
+    number1 = null;
+    number2 = null;
+    answer = null;
+    flagOperater = 0;
+    operator = null;
+}
 
 totalItemsDisplayed = calculatorDisplayProcess(numberTobeDisplayed, totalItemsDisplayed);
 
