@@ -20,6 +20,7 @@ let flagEqual = 0;
 let flagOperater = 0;
 let number1 = null;
 let number2 = null;
+let numberEnteredFlag = 0;
 
 memoryButtonPressed.forEach((element) => {
     element.addEventListener("click", memoryButtonClicked);
@@ -57,9 +58,12 @@ function numberButtonClicked(e) {
         //      if (second number is empty)
         if (number2 === null) {
             //          set second mumber to the button that was pressed
+            calculatorDisplay.innerText = temporaryNumberVariable;
             number2 = temporaryNumberVariable;
         } else if (number2 != null && flagOperater > 1 && operator === "+") {
+            number2 += temporaryNumberVariable;
             calculator_display.innerText = temporaryNumberVariable;
+            numberEnteredFlag = 1;
             // additionOperation();
             // calculatorDisplay.innerText = answer
         } else { // else
@@ -146,7 +150,7 @@ function additionOperation() {
     if (flagOperater == 1) {
         answer = Number(number1) + Number(number2);
         calculator_display.innerText = answer;
-    } else if (flagOperater > 1) {
+    } else if (flagOperater > 1 && numberEnteredFlag === 1) {
         answer += Number(number2);
         numberTobeDisplayed = answer;
         calculatorDisplay.innerText = numberTobeDisplayed;
@@ -159,5 +163,7 @@ function additionOperation() {
     //     flagEqual = 1;
     operator = "+";
     flagOperater += 1;
+    numberEnteredFlag = 0;
+    number2 = ""
 }
 
