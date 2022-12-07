@@ -1,7 +1,6 @@
 // IMPORTANT: Alt + 251 = square root and Alt + 0247 = division symbol
 const calculatorContainer = document.getElementById("calculator_container");
 const calculatorDisplay = document.getElementById("calculator_display");
-// const numberButtonElement = document.getElementById("number_button_7");
 const numberButtonElement = document.getElementsByClassName("number_button");
 const operatorButtonElement = document.getElementsByClassName("operator_button");
 const functionButtonElement = document.getElementsByClassName("function_button");
@@ -14,13 +13,16 @@ const functionButtonPressed = document.querySelectorAll(".function_button");
 const answerButtonPressed = document.querySelectorAll(".answer_button");
 let operator = null;
 let numberTobeDisplayed = "";
-let totalItemsDisplayed = "0";
 let answer = null;
+let totalItemsDisplayed = "0"
 let flagEqual = 0;
 let flagOperater = 0;
 let number1 = null;
 let number2 = null;
 let numberEnteredFlag = 0;
+
+// initial calculator display
+calculatorDisplay.innerText = "0";
 
 memoryButtonPressed.forEach((element) => {
     element.addEventListener("click", memoryButtonClicked);
@@ -60,20 +62,58 @@ function numberButtonClicked(e) {
             //          set second mumber to the button that was pressed
             calculatorDisplay.innerText = temporaryNumberVariable;
             number2 = temporaryNumberVariable;
+
+            // Muliple addtion handler
         } else if (number2 != null && flagOperater > 1 && operator === "+") {
-            number2 += temporaryNumberVariable;
-            calculator_display.innerText = temporaryNumberVariable;
+            if (numberEnteredFlag == 1) {
+                number2 += temporaryNumberVariable;
+            } else {
+                number2 += temporaryNumberVariable;
+            }
+            calculator_display.innerText = number2;
             numberEnteredFlag = 1;
-            // additionOperation();
-            // calculatorDisplay.innerText = answer
-        } else { // else
-            //          second number is not empty:  Append to the second number
+            // Muliple subraction handler
+        } else if (number2 != null && flagOperater > 1 && operator === "-") {
+            if (numberEnteredFlag == 1) {
+                number2 += temporaryNumberVariable;
+            } else {
+                number2 += temporaryNumberVariable;
+            }
+            calculator_display.innerText = number2;
+            numberEnteredFlag = 1;
+        }
+        else {
             number2 += temporaryNumberVariable;
             calculatorDisplay.innerText = number2
         }
-
-        console.log(`The answer so far is ${answer}`);
     }
+    if (operator == null) {
+        calculatorDisplay.innerText = numberTobeDisplayed;
+        number1 = Number(numberTobeDisplayed);
+    }
+
+    function additionOperation() {
+        if (flagOperater == 1) {
+            answer = Number(number1) + Number(number2);
+            calculator_display.innerText = answer;
+        } else if (flagOperater > 1 && numberEnteredFlag === 1) {
+            answer += Number(number2);
+            numberTobeDisplayed = answer;
+            calculatorDisplay.innerText = numberTobeDisplayed;
+        } else {
+            numberTobeDisplayed = "";
+        }
+        // else {
+        //     answer = Number(number1) + Number(number2);
+        //     calculatorDisplay.innerText = answer;
+        //     flagEqual = 1;
+        operator = "+";
+        flagOperater += 1;
+        numberEnteredFlag = 0;
+        number2 = ""
+    }
+    console.log(`The answer so far is ${answer}`);
+
     if (operator == null) {
         // if (first number is null)
         numberTobeDisplayed += temporaryNumberVariable;
@@ -81,6 +121,8 @@ function numberButtonClicked(e) {
         number1 = numberTobeDisplayed; // set first number to the button that was pressed
     }
 }
+
+
 
 // Operator Function
 function operatorButtonClicked(e) {
@@ -92,6 +134,9 @@ function operatorButtonClicked(e) {
         additionOperation();
     }
     // - operator
+    if (temporaryOperatorVariable === "-") {
+        subractionOperation();
+    }
     // x operator
     // ÷ operator
 }
@@ -137,15 +182,16 @@ function partialReset() {
     operator = null;
 }
 
-totalItemsDisplayed = calculatorDisplayProcess(numberTobeDisplayed, totalItemsDisplayed);
+// totalItemsDisplayed = calculatorDisplayProcess(numberTobeDisplayed, totalItemsDisplayed);
 
 //functions
-function calculatorDisplayProcess(numberTobeDisplayed, totalItemsDisplayed) {
-    totalItemsDisplayed = totalItemsDisplayed + numberTobeDisplayed;
-    calculatorDisplay.innerText = totalItemsDisplayed;
-    return totalItemsDisplayed;
-}
+// function calculatorDisplayProcess(numberTobeDisplayed, totalItemsDisplayed) {
+//     totalItemsDisplayed = totalItemsDisplayed + numberTobeDisplayed;
+//     calculatorDisplay.innerText = totalItemsDisplayed;
+//     return totalItemsDisplayed;
+// }
 
+// Operator functions
 function additionOperation() {
     if (flagOperater == 1) {
         answer = Number(number1) + Number(number2);
@@ -157,11 +203,24 @@ function additionOperation() {
     } else {
         numberTobeDisplayed = "";
     }
-    // else {
-    //     answer = Number(number1) + Number(number2);
-    //     calculatorDisplay.innerText = answer;
-    //     flagEqual = 1;
     operator = "+";
+    flagOperater += 1;
+    numberEnteredFlag = 0;
+    number2 = ""
+}
+
+function subtractionOperation() {
+    if (flagOperater == 1) {
+        answer = Number(number1) + Number(number2);
+        calculator_display.innerText = answer;
+    } else if (flagOperater > 1 && numberEnteredFlag === 1) {
+        answer -= Number(number2);
+        numberTobeDisplayed = answer;
+        calculatorDisplay.innerText = numberTobeDisplayed;
+    } else {
+        numberTobeDisplayed = "";
+    }
+    operator = "-";
     flagOperater += 1;
     numberEnteredFlag = 0;
     number2 = ""
