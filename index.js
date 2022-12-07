@@ -14,7 +14,7 @@ const answerButtonPressed = document.querySelectorAll(".answer_button");
 let operator = null;
 let numberTobeDisplayed = "";
 let answer = null;
-let totalItemsDisplayed = "0"
+// let totalItemsDisplayed = "0"
 let flagEqual = 0;
 let flagOperater = 0;
 let number1 = null;
@@ -87,31 +87,6 @@ function numberButtonClicked(e) {
             calculatorDisplay.innerText = number2
         }
     }
-    if (operator == null) {
-        calculatorDisplay.innerText = numberTobeDisplayed;
-        number1 = Number(numberTobeDisplayed);
-    }
-
-    function additionOperation() {
-        if (flagOperater == 1) {
-            answer = Number(number1) + Number(number2);
-            calculator_display.innerText = answer;
-        } else if (flagOperater > 1 && numberEnteredFlag === 1) {
-            answer += Number(number2);
-            numberTobeDisplayed = answer;
-            calculatorDisplay.innerText = numberTobeDisplayed;
-        } else {
-            numberTobeDisplayed = "";
-        }
-        // else {
-        //     answer = Number(number1) + Number(number2);
-        //     calculatorDisplay.innerText = answer;
-        //     flagEqual = 1;
-        operator = "+";
-        flagOperater += 1;
-        numberEnteredFlag = 0;
-        number2 = ""
-    }
     console.log(`The answer so far is ${answer}`);
 
     if (operator == null) {
@@ -135,7 +110,7 @@ function operatorButtonClicked(e) {
     }
     // - operator
     if (temporaryOperatorVariable === "-") {
-        subractionOperation();
+        subtractionOperation();
     }
     // x operator
     // ÷ operator
@@ -159,6 +134,9 @@ function equalButtonClicked(e) {
     // if (operator is equal to plus sign)
     if (operator == "+") {
         additionOperation();
+    }
+    else if (operator == "-") {
+        subtractionOperation();
     }
     flagEqual = 1
 }
@@ -211,7 +189,7 @@ function additionOperation() {
 
 function subtractionOperation() {
     if (flagOperater == 1) {
-        answer = Number(number1) + Number(number2);
+        answer = Number(number1) - Number(number2);
         calculator_display.innerText = answer;
     } else if (flagOperater > 1 && numberEnteredFlag === 1) {
         answer -= Number(number2);
