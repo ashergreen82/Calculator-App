@@ -14,7 +14,6 @@ const answerButtonPressed = document.querySelectorAll(".answer_button");
 let operator = null;
 let numberTobeDisplayed = "";
 let answer = null;
-// let totalItemsDisplayed = "0"
 let flagEqual = 0;
 let flagOperater = 0;
 let number1 = null;
@@ -81,14 +80,28 @@ function numberButtonClicked(e) {
             }
             calculator_display.innerText = number2;
             numberEnteredFlag = 1;
+        } else if (number2 != null && flagOperater > 1 && operator === "X") {
+            if (numberEnteredFlag == 1) {
+                number2 += temporaryNumberVariable;
+            } else {
+                number2 += temporaryNumberVariable;
+            }
+            calculator_display.innerText = number2;
+            numberEnteredFlag = 1;
+        } else if (number2 != null && flagOperater > 1 && operator === "÷") {
+            if (numberEnteredFlag == 1) {
+                number2 += temporaryNumberVariable;
+            } else {
+                number2 += temporaryNumberVariable;
+            }
+            calculator_display.innerText = number2;
+            numberEnteredFlag = 1;
         }
         else {
             number2 += temporaryNumberVariable;
             calculatorDisplay.innerText = number2
         }
     }
-    console.log(`The answer so far is ${answer}`);
-
     if (operator == null) {
         // if (first number is null)
         numberTobeDisplayed += temporaryNumberVariable;
@@ -97,13 +110,27 @@ function numberButtonClicked(e) {
     }
 }
 
-
-
 // Operator Function
 function operatorButtonClicked(e) {
     let temporaryOperatorVariable = e.target.innerText;
     console.log(e.target.innerText);
+    numberEnteredFlag = 0;
 
+    if (flagOperater == 1) {
+        if (operator == "+") {
+            answer = Number(number1) + Number(number2);
+            calculator_display.innerText = answer;
+        } else if (operater == "-") {
+            answer = Number(number1) - Number(number2);
+            calculator_display.innerText = answer;
+        } else if (operator == "*") {
+            answer = Number(number1) * Number(number2);
+            calculator_display.innerText = answer;
+        } else if (operator == "÷") {
+            answer = Number(number1) / Number(number2);
+            calculator_display.innerText = answer;
+        }
+    }
     // + operator
     if (temporaryOperatorVariable === "+") {
         additionOperation();
@@ -112,8 +139,14 @@ function operatorButtonClicked(e) {
     if (temporaryOperatorVariable === "-") {
         subtractionOperation();
     }
-    // x operator
+    // X operator
+    if (temporaryOperatorVariable === "X") {
+        multiplicationOperation();
+    }
     // ÷ operator
+    if (temporaryOperatorVariable === "÷") {
+        divisionOperation();
+    }
 }
 
 // Clear Function
@@ -138,6 +171,12 @@ function equalButtonClicked(e) {
     else if (operator == "-") {
         subtractionOperation();
     }
+    else if (operator == "X") {
+        multiplicationOperation();
+    }
+    else if (operator == "÷") {
+        divisionOperation();
+    }
     flagEqual = 1
 }
 
@@ -160,21 +199,13 @@ function partialReset() {
     operator = null;
 }
 
-// totalItemsDisplayed = calculatorDisplayProcess(numberTobeDisplayed, totalItemsDisplayed);
-
-//functions
-// function calculatorDisplayProcess(numberTobeDisplayed, totalItemsDisplayed) {
-//     totalItemsDisplayed = totalItemsDisplayed + numberTobeDisplayed;
-//     calculatorDisplay.innerText = totalItemsDisplayed;
-//     return totalItemsDisplayed;
-// }
-
 // Operator functions
 function additionOperation() {
-    if (flagOperater == 1) {
-        answer = Number(number1) + Number(number2);
-        calculator_display.innerText = answer;
-    } else if (flagOperater > 1 && numberEnteredFlag === 1) {
+    // if (flagOperater == 1) {
+    //     answer = Number(number1) + Number(number2);
+    //     // calculator_display.innerText = answer;
+    // } else 
+    if (flagOperater > 1 && numberEnteredFlag === 1) {
         answer += Number(number2);
         numberTobeDisplayed = answer;
         calculatorDisplay.innerText = numberTobeDisplayed;
@@ -188,10 +219,11 @@ function additionOperation() {
 }
 
 function subtractionOperation() {
-    if (flagOperater == 1) {
-        answer = Number(number1) - Number(number2);
-        calculator_display.innerText = answer;
-    } else if (flagOperater > 1 && numberEnteredFlag === 1) {
+    // if (flagOperater == 1) {
+    //     answer = Number(number1) - Number(number2);
+    //     calculator_display.innerText = answer;
+    // } else 
+    if (flagOperater > 1 && numberEnteredFlag === 1) {
         answer -= Number(number2);
         numberTobeDisplayed = answer;
         calculatorDisplay.innerText = numberTobeDisplayed;
@@ -204,3 +236,39 @@ function subtractionOperation() {
     number2 = ""
 }
 
+function multiplicationOperation() {
+    // if (flagOperater == 1) {
+    //     answer = Number(number1) * Number(number2);
+    //     calculator_display.innerText = answer;
+    // } else 
+
+    if (flagOperater > 1 && numberEnteredFlag === 1) {
+        answer *= Number(number2);
+        numberTobeDisplayed = answer;
+        calculatorDisplay.innerText = numberTobeDisplayed;
+    } else {
+        numberTobeDisplayed = "";
+    }
+    operator = "X";
+    flagOperater += 1;
+    numberEnteredFlag = 0;
+    number2 = ""
+}
+
+function divisionOperation() {
+    // if (flagOperater == 1) {
+    //     answer = Number(number1) / Number(number2);
+    //     calculator_display.innerText = answer;
+    // } else
+    if (flagOperater > 1 && numberEnteredFlag === 1) {
+        answer /= Number(number2);
+        numberTobeDisplayed = answer;
+        calculatorDisplay.innerText = numberTobeDisplayed;
+    } else {
+        numberTobeDisplayed = "";
+    }
+    operator = "÷";
+    flagOperater += 1;
+    numberEnteredFlag = 0;
+    number2 = ""
+}
