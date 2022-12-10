@@ -19,6 +19,7 @@ let flagOperater = 0;
 let number1 = null;
 let number2 = null;
 let numberEnteredFlag = 0;
+let memoryButtonValue = 0;
 
 // initial calculator display
 calculatorDisplay.innerText = "0";
@@ -40,13 +41,16 @@ answerButtonPressed.forEach((element) => {
 })
 
 function memoryButtonClicked(e) {
+    let temporaryMemoryVariable = e.target.innerText;
     console.log(e.target.innerText);
+    memoryOperations(temporaryMemoryVariable);
 }
 
 // Number Buttons
 function numberButtonClicked(e) {
     let temporaryNumberVariable = e.target.innerText;
     console.log(e.target.innerText);
+    numberEnteredFlag = 1
 
     // if equals was previoulsy pressed
     if (flagEqual === 1) {
@@ -115,20 +119,38 @@ function operatorButtonClicked(e) {
     let temporaryOperatorVariable = e.target.innerText;
     console.log(e.target.innerText);
     numberEnteredFlag = 0;
+    if (temporaryOperatorVariable === "√") {
+        calculatorDisplay.innerText = Number(Number(Math.sqrt(calculatorDisplay.innerText).toFixed(3)));
+    }
+    if (temporaryOperatorVariable === "+/-") {
+        const currentDisplay = calculatorDisplay.innerText;
+        let temporarySignValue = 0;
+        signTest = Math.sign(currentDisplay);
+        if (signTest === 1) {
+            temporarySignValue = Number((Number(-Math.abs(currentDisplay).toFixed(3))));
+            calculatorDisplay.innerText = temporarySignValue;
+            number1 = temporarySignValue;
+        }
+        if (signTest === -1) {
+            calculatorDisplay.innerText = Number((Number(Math.abs(currentDisplay).toFixed(3))));
+            calculatorDisplay.innerText = temporarySignValue;
+            number1 = temporarySignValue;
+        }
+    }
 
     // if operator is not null AND first number is not null AND second number is not null
     if (operator !== null && number1 !== null && number2 !== null) {
         if (operator === "+") {
-            number1 = Number(number1) + Number(number2);
+            number1 = Number(number1.toFixed(3)) + Number(number2.toFixed(3));
         }
         if (operator === "-") {
-            number1 = Number(number1) - Number(number2);
+            number1 = Number(number1.toFixed(3)) - Number(number2.toFixed(3));
         }
         if (operator === "X") {
-            number1 = Number(number1) * Number(number2);
+            number1 = Number(number1.toFixed(3)) * Number(number2.toFixed(3));
         }
         if (operator === "÷") {
-            number1 = Number(number1) / Number(number2);
+            number1 = Number(number1.toFixed(3)) / Number(number2.toFixed(3));
         }
         // display the result on the screen
         calculator_display.innerText = number1;
@@ -136,37 +158,7 @@ function operatorButtonClicked(e) {
         number2 = null;
     }
 
-    if (flagOperater == 1) {
-        if (operator == "+") {
-            answer = Number(number1) + Number(number2);
-            calculator_display.innerText = number1;
-        } else if (operator == "-") {
-            answer = Number(number1) - Number(number2);
-            calculator_display.innerText = number1;
-        } else if (operator == "*") {
-            answer = Number(number1) * Number(number2);
-            calculator_display.innerText = number1;
-        } else if (operator == "÷") {
-            answer = Number(number1) / Number(number2);
-            calculator_display.innerText = number1;
-        }
-    }
-    // + operator
-    if (temporaryOperatorVariable === "+") {
-        additionOperation();
-    }
-    // - operator
-    if (temporaryOperatorVariable === "-") {
-        subtractionOperation();
-    }
-    // X operator
-    if (temporaryOperatorVariable === "X") {
-        multiplicationOperation();
-    }
-    // ÷ operator
-    if (temporaryOperatorVariable === "÷") {
-        divisionOperation();
-    }
+    operator = temporaryOperatorVariable;
 }
 
 // Clear Function
@@ -177,13 +169,18 @@ function functionButtonClicked(e) {
         clearDisplay();
         partialReset();
     }
+
+    if (temporaryFunctionVariable === "AC") {
+        clearDisplay();
+        fullReset();
+    }
 }
 
 // Equals Function
 function equalButtonClicked(e) {
     let temporaryFunctionVariable = e.target.innerText;
     console.log(temporaryFunctionVariable);
-    console.log(answer);
+    console.log(number1);
     // if (operator is equal to plus sign)
     if (operator == "+") {
         additionOperation();
@@ -219,19 +216,24 @@ function partialReset() {
     operator = null;
 }
 
+function fullReset() {
+    numberTobeDisplayed = "";
+    calculatorDisplay.innerText = "0";
+    flagEqual = 0;
+    temporaryNumberVariable = "";
+    number1 = null;
+    number2 = null;
+    answer = null;
+    flagOperater = 0;
+    operator = null;
+    memoryButtonValue = "0"
+}
+
 // Operator functions
 function additionOperation() {
-    // if (flagOperater == 1) {
-    //     answer = Number(number1) + Number(number2);
-    //     // calculator_display.innerText = answer;
-    // } else 
-    if (flagOperater > 1 && numberEnteredFlag === 1) {
-        number1 += Number(number2);
-        numberTobeDisplayed = number1;
-        calculatorDisplay.innerText = numberTobeDisplayed;
-    } else {
-        numberTobeDisplayed = "";
-    }
+    number1 = Number(number1) + Number(Number(number2).toFixed(3));
+    numberTobeDisplayed = number1;
+    calculatorDisplay.innerText = numberTobeDisplayed;
     operator = "+";
     flagOperater += 1;
     numberEnteredFlag = 0;
@@ -239,17 +241,9 @@ function additionOperation() {
 }
 
 function subtractionOperation() {
-    // if (flagOperater == 1) {
-    //     answer = Number(number1) - Number(number2);
-    //     calculator_display.innerText = answer;
-    // } else 
-    if (flagOperater > 1 && numberEnteredFlag === 1) {
-        number1 -= Number(number2);
-        numberTobeDisplayed = number1;
-        calculatorDisplay.innerText = numberTobeDisplayed;
-    } else {
-        numberTobeDisplayed = "";
-    }
+    number1 = Number(number1) - Number(Number(number2).toFixed(3));
+    numberTobeDisplayed = number1;
+    calculatorDisplay.innerText = numberTobeDisplayed;
     operator = "-";
     flagOperater += 1;
     numberEnteredFlag = 0;
@@ -257,38 +251,39 @@ function subtractionOperation() {
 }
 
 function multiplicationOperation() {
-    // if (flagOperater == 1) {
-    //     answer = Number(number1) * Number(number2);
-    //     calculator_display.innerText = answer;
-    // } else 
-
-    if (flagOperater > 1 && numberEnteredFlag === 1) {
-        number1 *= Number(number2);
-        numberTobeDisplayed = number1;
-        calculatorDisplay.innerText = numberTobeDisplayed;
-    } else {
-        numberTobeDisplayed = "";
-    }
-    operator = "X";
+    number1 = Number(number1) * Number(Number(number2).toFixed(3));
+    numberTobeDisplayed = number1;
+    calculatorDisplay.innerText = numberTobeDisplayed;
+    operator = "*";
     flagOperater += 1;
     numberEnteredFlag = 0;
     number2 = ""
 }
 
 function divisionOperation() {
-    // if (flagOperater == 1) {
-    //     answer = Number(number1) / Number(number2);
-    //     calculator_display.innerText = answer;
-    // } else
-    if (flagOperater > 1 && numberEnteredFlag === 1) {
-        number1 /= Number(number2);
-        numberTobeDisplayed = number1;
-        calculatorDisplay.innerText = numberTobeDisplayed;
-    } else {
-        numberTobeDisplayed = "";
-    }
+    number1 = Number(number1) / Number(Number(number2).toFixed(3));
+    numberTobeDisplayed = number1;
+    calculatorDisplay.innerText = numberTobeDisplayed;
     operator = "÷";
     flagOperater += 1;
     numberEnteredFlag = 0;
     number2 = ""
+}
+
+function memoryOperations(temporaryMemoryVariable) {
+    if (temporaryMemoryVariable == "M+") {
+        memoryButtonValue = Number(memoryButtonValue) + Number(Number(calculatorDisplay.innerText).toFixed(3));
+    }
+
+    if (temporaryMemoryVariable == "M-") {
+        memoryButtonValue = Number(memoryButtonValue) - Number(Number(calculatorDisplay.innerText).toFixed(3));
+    }
+
+    if (temporaryMemoryVariable == "MR") {
+        calculatorDisplay.innerText = memoryButtonValue;
+    }
+
+    if (temporaryMemoryVariable == "MC") {
+        memoryButtonValue = 0;
+    }
 }
