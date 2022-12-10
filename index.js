@@ -125,14 +125,14 @@ function operatorButtonClicked(e) {
     if (temporaryOperatorVariable === "+/-") {
         const currentDisplay = calculatorDisplay.innerText;
         let temporarySignValue = 0;
-        signTest = Math.sign(currentDisplay);
+        signTest = Number(Math.sign(currentDisplay));
         if (signTest === 1) {
             temporarySignValue = Number((Number(-Math.abs(currentDisplay).toFixed(3))));
             calculatorDisplay.innerText = temporarySignValue;
             number1 = temporarySignValue;
         }
         if (signTest === -1) {
-            calculatorDisplay.innerText = Number((Number(Math.abs(currentDisplay).toFixed(3))));
+            temporarySignValue = Number((Number(Math.abs(currentDisplay).toFixed(3))));
             calculatorDisplay.innerText = temporarySignValue;
             number1 = temporarySignValue;
         }
@@ -141,16 +141,17 @@ function operatorButtonClicked(e) {
     // if operator is not null AND first number is not null AND second number is not null
     if (operator !== null && number1 !== null && number2 !== null) {
         if (operator === "+") {
-            number1 = Number(number1.toFixed(3)) + Number(number2.toFixed(3));
+            number1 = Number(number1) + Number(number2);
         }
         if (operator === "-") {
-            number1 = Number(number1.toFixed(3)) - Number(number2.toFixed(3));
+            number1 = Number(number1) - Number(number2);
         }
         if (operator === "X") {
-            number1 = Number(number1.toFixed(3)) * Number(number2.toFixed(3));
+            number1 = Number(number1) * Number(number2);
         }
         if (operator === "÷") {
-            number1 = Number(number1.toFixed(3)) / Number(number2.toFixed(3));
+            number1 = Number(number1) / Number(number2);
+            Number(Number(number1.toFixed(3)));
         }
         // display the result on the screen
         calculator_display.innerText = number1;
@@ -231,8 +232,8 @@ function fullReset() {
 
 // Operator functions
 function additionOperation() {
-    number1 = Number(number1) + Number(Number(number2).toFixed(3));
-    numberTobeDisplayed = number1;
+    number1 = Number(number1) + Number(number2);
+    numberTobeDisplayed = Number(Number(number1.toFixed(3)));
     calculatorDisplay.innerText = numberTobeDisplayed;
     operator = "+";
     flagOperater += 1;
@@ -241,8 +242,8 @@ function additionOperation() {
 }
 
 function subtractionOperation() {
-    number1 = Number(number1) - Number(Number(number2).toFixed(3));
-    numberTobeDisplayed = number1;
+    number1 = Number(number1) - Number(number2);
+    numberTobeDisplayed = Number(Number(number1.toFixed(3)));
     calculatorDisplay.innerText = numberTobeDisplayed;
     operator = "-";
     flagOperater += 1;
@@ -251,8 +252,8 @@ function subtractionOperation() {
 }
 
 function multiplicationOperation() {
-    number1 = Number(number1) * Number(Number(number2).toFixed(3));
-    numberTobeDisplayed = number1;
+    number1 = Number(number1) * Number(number2);
+    numberTobeDisplayed = Number(Number(number1.toFixed(3)));
     calculatorDisplay.innerText = numberTobeDisplayed;
     operator = "*";
     flagOperater += 1;
@@ -261,8 +262,8 @@ function multiplicationOperation() {
 }
 
 function divisionOperation() {
-    number1 = Number(number1) / Number(Number(number2).toFixed(3));
-    numberTobeDisplayed = number1;
+    number1 = Number(number1) / Number(number2);
+    numberTobeDisplayed = Number(Number(number1.toFixed(3)));
     calculatorDisplay.innerText = numberTobeDisplayed;
     operator = "÷";
     flagOperater += 1;
@@ -272,11 +273,11 @@ function divisionOperation() {
 
 function memoryOperations(temporaryMemoryVariable) {
     if (temporaryMemoryVariable == "M+") {
-        memoryButtonValue = Number(memoryButtonValue) + Number(Number(calculatorDisplay.innerText).toFixed(3));
+        memoryButtonValue = Number(Number(memoryButtonValue)) + Number(Number(calculatorDisplay.innerText).toFixed(3));
     }
 
     if (temporaryMemoryVariable == "M-") {
-        memoryButtonValue = Number(memoryButtonValue) - Number(Number(calculatorDisplay.innerText).toFixed(3));
+        memoryButtonValue = Number(Number(memoryButtonValue)) - Number(Number(calculatorDisplay.innerText).toFixed(3));
     }
 
     if (temporaryMemoryVariable == "MR") {
