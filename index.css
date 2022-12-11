@@ -56,9 +56,10 @@ img {
 }
 
 #calculator_display {
-    /* display: flexbox; */
+    margin: auto;
+    font-size: 40px;
     background-color: aliceblue;
-    width: 10%;
+    width: 24%;
     text-justify: right;
     text-align: right;
 }
