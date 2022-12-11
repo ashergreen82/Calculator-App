@@ -5,7 +5,7 @@
 You can run the program from [here](https://ashergreen82.github.io/Calculator-App/).
 <br /><br />
 
-![screenshot](/images/Calculator%20Screen%20Shot.jpg)
+![screenshot](/Images/Calculator%20Screen%20Shot.jpg)
 
 ## **Summary**
 
