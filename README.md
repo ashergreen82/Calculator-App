@@ -2,7 +2,7 @@
 
 *A simple calculator application written in Javascript, HTML, and CSS*
 
-You can run the program from [here]<https://ashergreen82.github.io/Calculator-App/>.
+You can run the program from [here](https://ashergreen82.github.io/Calculator-App/).
 <br /><br />
 
 ![screenshot](/images/to%20do%20app%20screenshot.png)
@@ -15,7 +15,8 @@ This was a huge challenge for me, as often when one thing was fixed it broke som
 and the program would fail.  This program was a tricky balancing act that tested my resolve as a programmer.  I learned quite a lot with this program and though it took me
 quite a few weeks to put it together I have come out of it a much stronger an more capable programmer.
 
-I learned how to work more closely with event handlers.  I learned how to debug in an event driven program, while getting lot's of practice working through the logic to make it all work.  So, without further adiou, go to the github page, and enjoy!
+I learned how to work more closely with event handlers.  I learned how to debug in an event driven program, while getting lot's of practice working through the logic to
+make it all work.  So, without further adiou, go to the github page, and enjoy!
 </pre>
 
 #### **Author**
