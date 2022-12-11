@@ -53,6 +53,7 @@ img {
     background-color: #2196F3;
     padding: 10px;
     justify-content: center;
+    /* background-size: 50px 50px; */
 }
 
 #calculator_display {
@@ -66,7 +67,6 @@ img {
 
 .number_button {
     /* display: flex; */
-    /* display: grid; */
     /* margin-right: 10px; */
     margin: 10px;
     background-color: orange;
