@@ -46,14 +46,13 @@ img {
 }
 
 #calculator_container {
-    /* display: flex; */
     display: grid;
-    /* align-items: center; */
     grid-template-columns: repeat(5, 90px);
     background-color: #2196F3;
     padding: 10px;
+    width: 30%;
     justify-content: center;
-    /* background-size: 50px 50px; */
+    margin: auto;
 }
 
 #calculator_display {
@@ -61,7 +60,6 @@ img {
     font-size: 40px;
     background-color: aliceblue;
     width: 24%;
-    text-justify: right;
     text-align: right;
 }
 
