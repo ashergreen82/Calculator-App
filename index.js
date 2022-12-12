@@ -117,6 +117,7 @@ function operatorButtonClicked(e) {
     numberEnteredFlag = 0;
     if (temporaryOperatorVariable === "√") {
         calculatorDisplay.innerText = Number(Number(Math.sqrt(calculatorDisplay.innerText).toFixed(3)));
+        operator = temporaryOperatorVariable;
     }
     if (temporaryOperatorVariable === "+/-") {
         const currentDisplay = calculatorDisplay.innerText;
@@ -148,7 +149,8 @@ function operatorButtonClicked(e) {
             number1 = Number(number1) / Number(number2);
             Number(Number(number1.toFixed(3)));
         }
-        calculator_display.innerText = number1;
+        if (operator !== "√")
+            calculator_display.innerText = number1;
         number2 = null;
     }
 
