@@ -41,14 +41,12 @@ answerButtonPressed.forEach((element) => {
 
 function memoryButtonClicked(e) {
     let temporaryMemoryVariable = e.target.innerText;
-    // console.log(e.target.innerText);
     memoryOperations(temporaryMemoryVariable);
 }
 
 // Number Buttons
 function numberButtonClicked(e) {
     let temporaryNumberVariable = e.target.innerText;
-    // console.log(e.target.innerText);
     numberEnteredFlag = 1
 
     if (flagEqual === 1) {
@@ -116,7 +114,6 @@ function numberButtonClicked(e) {
 // Operator Function
 function operatorButtonClicked(e) {
     let temporaryOperatorVariable = e.target.innerText;
-    // console.log(e.target.innerText);
     numberEnteredFlag = 0;
     if (temporaryOperatorVariable === "√") {
         calculatorDisplay.innerText = Number(Number(Math.sqrt(calculatorDisplay.innerText).toFixed(3)));
@@ -161,7 +158,6 @@ function operatorButtonClicked(e) {
 // Clear Function
 function functionButtonClicked(e) {
     let temporaryFunctionVariable = e.target.innerText;
-    // console.log(e.target.innerText);
     if (temporaryFunctionVariable === "C") {
         clearDisplay();
         partialReset();
@@ -176,8 +172,6 @@ function functionButtonClicked(e) {
 // Equals Function
 function equalButtonClicked(e) {
     let temporaryFunctionVariable = e.target.innerText;
-    // console.log(temporaryFunctionVariable);
-    // console.log(number1);
     if (operator == "+") {
         additionOperation();
     }
