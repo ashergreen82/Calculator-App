@@ -13,7 +13,6 @@ const functionButtonPressed = document.querySelectorAll(".function_button");
 const answerButtonPressed = document.querySelectorAll(".answer_button");
 let operator = null;
 let numberTobeDisplayed = "";
-let answer = null;
 let flagEqual = 0;
 let flagOperater = 0;
 let number1 = null;
@@ -42,27 +41,23 @@ answerButtonPressed.forEach((element) => {
 
 function memoryButtonClicked(e) {
     let temporaryMemoryVariable = e.target.innerText;
-    console.log(e.target.innerText);
+    // console.log(e.target.innerText);
     memoryOperations(temporaryMemoryVariable);
 }
 
 // Number Buttons
 function numberButtonClicked(e) {
     let temporaryNumberVariable = e.target.innerText;
-    console.log(e.target.innerText);
+    // console.log(e.target.innerText);
     numberEnteredFlag = 1
 
-    // if equals was previoulsy pressed
     if (flagEqual === 1) {
         calculatorDisplay.innerText = temporaryNumberVariable;
         partialReset();
     }
-    // if (opeator button has been pressed)
 
     if (operator !== null) {
-        //      if (second number is empty)
         if (number2 === null) {
-            //          set second mumber to the button that was pressed
             calculatorDisplay.innerText = temporaryNumberVariable;
             number2 = temporaryNumberVariable;
 
@@ -75,6 +70,7 @@ function numberButtonClicked(e) {
             }
             calculator_display.innerText = number2;
             numberEnteredFlag = 1;
+
             // Muliple subraction handler
         } else if (number2 != null && flagOperater > 1 && operator === "-") {
             if (numberEnteredFlag == 1) {
@@ -84,6 +80,8 @@ function numberButtonClicked(e) {
             }
             calculator_display.innerText = number2;
             numberEnteredFlag = 1;
+
+            // Multiple multiplicaiton handler
         } else if (number2 != null && flagOperater > 1 && operator === "X") {
             if (numberEnteredFlag == 1) {
                 number2 += temporaryNumberVariable;
@@ -92,6 +90,8 @@ function numberButtonClicked(e) {
             }
             calculator_display.innerText = number2;
             numberEnteredFlag = 1;
+
+            // Multiple subtraction handler
         } else if (number2 != null && flagOperater > 1 && operator === "÷") {
             if (numberEnteredFlag == 1) {
                 number2 += temporaryNumberVariable;
@@ -107,17 +107,16 @@ function numberButtonClicked(e) {
         }
     }
     if (operator == null) {
-        // if (first number is null)
         numberTobeDisplayed += temporaryNumberVariable;
         calculatorDisplay.innerText = numberTobeDisplayed;
-        number1 = numberTobeDisplayed; // set first number to the button that was pressed
+        number1 = numberTobeDisplayed;
     }
 }
 
 // Operator Function
 function operatorButtonClicked(e) {
     let temporaryOperatorVariable = e.target.innerText;
-    console.log(e.target.innerText);
+    // console.log(e.target.innerText);
     numberEnteredFlag = 0;
     if (temporaryOperatorVariable === "√") {
         calculatorDisplay.innerText = Number(Number(Math.sqrt(calculatorDisplay.innerText).toFixed(3)));
@@ -138,7 +137,6 @@ function operatorButtonClicked(e) {
         }
     }
 
-    // if operator is not null AND first number is not null AND second number is not null
     if (operator !== null && number1 !== null && number2 !== null) {
         if (operator === "+") {
             number1 = Number(number1) + Number(number2);
@@ -153,9 +151,7 @@ function operatorButtonClicked(e) {
             number1 = Number(number1) / Number(number2);
             Number(Number(number1.toFixed(3)));
         }
-        // display the result on the screen
         calculator_display.innerText = number1;
-        // set "number2" to null
         number2 = null;
     }
 
@@ -165,7 +161,7 @@ function operatorButtonClicked(e) {
 // Clear Function
 function functionButtonClicked(e) {
     let temporaryFunctionVariable = e.target.innerText;
-    console.log(e.target.innerText);
+    // console.log(e.target.innerText);
     if (temporaryFunctionVariable === "C") {
         clearDisplay();
         partialReset();
@@ -180,8 +176,8 @@ function functionButtonClicked(e) {
 // Equals Function
 function equalButtonClicked(e) {
     let temporaryFunctionVariable = e.target.innerText;
-    console.log(temporaryFunctionVariable);
-    console.log(number1);
+    // console.log(temporaryFunctionVariable);
+    // console.log(number1);
     // if (operator is equal to plus sign)
     if (operator == "+") {
         additionOperation();
@@ -205,6 +201,7 @@ function clearDisplay() {
     flagEqual = 0
 }
 
+// reset functions
 function partialReset() {
     numberTobeDisplayed = "";
     calculatorDisplay.innerText = "0";
