@@ -64,58 +64,41 @@ img {
 }
 
 .number_button {
-    /* display: flex; */
-    /* margin-right: 10px; */
     margin: 10px;
     background-color: orange;
     font-size: 35px;
-    /* border-radius: 8px; */
 }
 
 .operator_button {
-    /* display: flex; */
-    /* display: grid; */
-    /* margin-right: 10px; */
     margin: 10px;
     background-color: orange;
     font-size: 35px;
-    /* border-radius: 8px; */
 }
 
 .function_button {
-    /* display: flex; */
-    /* display: grid; */
-    /* margin-right: 10px; */
     margin: 10px;
     background-color: orange;
     font-size: 35px;
-    /* border-radius: 8px; */
 }
 
 .memory_button {
-    /* display: flex; */
-    /* display: grid; */
-    /* margin-right: 10px; */
     margin: 10px;
     background-color: orange;
     font-size: 35px;
-    /* border-radius: 8px; */
 }
 
 .answer_button {
-    /* display: flex; */
-    /* display: grid; */
-    /* margin-right: 10px; */
     margin: 10px;
     background-color: orange;
     font-size: 35px;
-    /* border-radius: 8px; */
 }
 
 button:hover {
     background-color: yellow;
 }
 
-.number_button:hover {
-    background-color: yellow;
+button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
 }
