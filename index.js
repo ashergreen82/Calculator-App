@@ -178,7 +178,6 @@ function equalButtonClicked(e) {
     let temporaryFunctionVariable = e.target.innerText;
     // console.log(temporaryFunctionVariable);
     // console.log(number1);
-    // if (operator is equal to plus sign)
     if (operator == "+") {
         additionOperation();
     }
